@@ -11,7 +11,7 @@ else
   sif_array = ARGV
 end
 
-result_dir = "/Volumes/Backup/SAGE Results/JBS/"
+result_dir = "/Users/abroman/Documents/SAGE Project/Results/JBS"
 
 # Build array of legitimate dates (check email from Holly for limits)
 #   * check email from Holly for limits (10/1/2008 to 2/29/2012)

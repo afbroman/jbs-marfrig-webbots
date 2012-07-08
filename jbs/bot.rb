@@ -30,8 +30,8 @@ for year in 2008..2012
       # Limit 2008 to after October 1st
       next if year == 2008 && month.to_i < 10
 
-      # Limit 2012 to before March 1st
-      next if year == 2012 && month.to_i > 2
+      # Limit 2012 to before July 1st
+      next if year == 2012 && month.to_i > 6
       
       # Limit April, June, September, and November 
       next if day == 31 && (month == "04" || month == "06" || month == "09" || month == 11)

@@ -85,7 +85,7 @@ sif_array.each do |sif|
 
     begin
       Timeout::timeout(30) do
-        f = File.open("#{result_dir}#{sif}_#{filename_array[index]}.html", 'w')
+        f = File.open("#{result_dir}#{sif}/#{sif}_#{filename_array[index]}.html", 'w')
         post_data["ctl00%24ContentPlaceHolder1%24txtsif"] = sif
         post_data["ctl00%24ContentPlaceHolder1%24txtdata_producao"] = date 
 

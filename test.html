@@ -1,0 +1,774 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+
+
+	<script>
+          function mascara_data(data){
+              var mydata = '';
+              mydata = mydata + data;
+              if (mydata.length == 2){
+                  mydata = mydata + '/';
+                  document.forms[0].data.value = mydata;
+              }
+              if (mydata.length == 5){
+                  mydata = mydata + '/';
+                  document.forms[0].data.value = mydata;
+              }
+              if (mydata.length == 10){
+                  verifica_data();
+              }
+          }
+
+          function mascara_data_prod(data_producao){
+		                var mydata = '';
+		                mydata = mydata + data_producao;
+		                if (mydata.length == 2){
+		                    mydata = mydata + '/';
+		                    document.forms[0].data_producao.value = mydata;
+		                }
+		                if (mydata.length == 5){
+		                    mydata = mydata + '/';
+		                    document.forms[0].data_producao.value = mydata;
+		                }
+		                if (mydata.length == 10){
+		                    verifica_data_prod();
+		                }
+          }
+
+          function verifica_data () {
+
+            dia = (document.forms[0].data.value.substring(0,2));
+            mes = (document.forms[0].data.value.substring(3,5));
+            ano = (document.forms[0].data.value.substring(6,10));
+
+            situacao = "";
+            // verifica o dia valido para cada mes
+            if ((dia < 01)||(dia < 01 || dia > 30) && (  mes == 04 || mes == 06 || mes == 09 || mes == 11 ) || dia > 31) {
+                situacao = "falsa";
+            }
+
+            // verifica se o mes e valido
+            if (mes < 01 || mes > 12 ) {
+                situacao = "falsa";
+            }
+
+            // verifica se e ano bissexto
+            if (mes == 2 && ( dia < 01 || dia > 29 || ( dia > 28 && (parseInt(ano / 4) != ano / 4)))) {
+                situacao = "falsa";
+            }
+
+            if (document.forms[0].data.value == "") {
+                situacao = "falsa";
+            }
+
+            if (situacao == "falsa") {
+                alert("Data inválida!");
+                document.forms[0].data.focus();
+            }
+          }
+
+		 function verifica_data_prod () {
+
+            dia = (document.forms[0].data_producao.value.substring(0,2));
+            mes = (document.forms[0].data_producao.value.substring(3,5));
+            ano = (document.forms[0].data_producao.value.substring(6,10));
+
+            situacao = "";
+            // verifica o dia valido para cada mes
+            if ((dia < 01)||(dia < 01 || dia > 30) && (  mes == 04 || mes == 06 || mes == 09 || mes == 11 ) || dia > 31) {
+                situacao = "falsa";
+            }
+
+            // verifica se o mes e valido
+            if (mes < 01 || mes > 12 ) {
+                situacao = "falsa";
+            }
+
+            // verifica se e ano bissexto
+            if (mes == 2 && ( dia < 01 || dia > 29 || ( dia > 28 && (parseInt(ano / 4) != ano / 4)))) {
+                situacao = "falsa";
+            }
+
+            if (document.forms[0].data_producao.value == "") {
+                situacao = "falsa";
+            }
+
+            if (situacao == "falsa") {
+                alert("Data inválida!");
+                document.forms[0].data_producao.focus();
+            }
+          }
+
+          function mascara_hora(hora){
+              var myhora = '';
+              myhora = myhora + hora;
+              if (myhora.length == 2){
+                  myhora = myhora + ':';
+                  document.forms[0].hora.value = myhora;
+              }
+              if (myhora.length == 5){
+                  verifica_hora();
+              }
+          }
+
+          function verifica_hora(){
+              hrs = (document.forms[0].hora.value.substring(0,2));
+              min = (document.forms[0].hora.value.substring(3,5));
+
+              alert('hrs '+ hrs);
+              alert('min '+ min);
+
+              situacao = "";
+              // verifica data e hora
+              if ((hrs < 00 ) || (hrs > 23) || ( min < 00) ||( min > 59)){
+                  situacao = "falsa";
+              }
+
+              if (document.forms[0].hora.value == "") {
+                  situacao = "falsa";
+              }
+
+              if (situacao == "falsa") {
+                  alert("Hora inválida!");
+                  document.forms[0].hora.focus();
+              }
+          }
+       </script>
+       <script type="text/javascript">
+	   		function show(){
+				if(document.getElementById('sif').value == ''){
+					document.getElementById('conteudo_embalagem').style.display = 'none';
+					document.getElementById('conteudo_producao').style.display = 'none';
+				}
+				else{
+					if(document.getElementById('sif').value == '3712' || document.getElementById('sif').value == '2543' || 
+						document.getElementById('sif').value == '4238' || document.getElementById('sif').value == '2500' ||
+						document.getElementById('sif').value == '1751' || document.getElementById('sif').value == '3047' ||
+						document.getElementById('sif').value == '3062' || document.getElementById('sif').value == '4334' ||
+						document.getElementById('sif').value == '3250' ){
+						document.getElementById('conteudo_embalagem').style.display = 'block';
+						document.getElementById('conteudo_producao').style.display = 'block';
+					}else{
+						document.getElementById('conteudo_embalagem').style.display = 'none';
+						document.getElementById('conteudo_producao').style.display = 'block';
+					}
+				}
+			}
+		</script>
+<script type="text/javascript" src="js/bubble-tooltip.js"></script>
+<link rel="StyleSheet" href="http://www.marfrig.com.br/css/styleIframes.css" type="text/css" media="screen" />
+
+<!-- Contact Form CSS files -->
+<link rel="stylesheet" href="css/bubble-tooltip.css" media="screen">
+<link type='text/css' href='css/basic.css' rel='stylesheet' media='screen' />
+<!-- IE6 "fix" for the close png image -->
+<!--[if IE]>
+<link type='text/css' href='css/basic_ie.css' rel='stylesheet' media='screen' />
+<![endif]-->
+<style type="text/css">
+#guardaGadoLegal {
+								float:left;
+								width:675px;
+}
+#guardaGadoLegal form,
+#guardaGadoLegal form ul {
+                float:left;
+}
+#guardaGadoLegal form ul li{
+                float:none;
+                padding-left:5px;
+                padding-bottom:5px;
+}
+#guardaGadoLegal form ul #botao {
+                padding:2px 0px 0px 3px;
+}
+#guardaGadoLegal .textoBusca {
+                height:16px;
+}
+
+#conteudo_producao {
+	display:none;
+}
+
+#conteudo_embalagem {
+	display:none;
+}
+
+</style>
+</head>
+<body>
+
+                <div id="guardaGadoLegal">
+
+
+									<img src="images/logo-gado-legal.jpg"
+									     alt="Gado Legal"
+									     title="Gado Legal"
+									     class="floatLeft" id="logo" />
+									<p>Favor preencher os campos abaixo.</p>
+									<form action="origem-lotes.asp">
+                  	<ul>
+                    	<li>
+                    		<strong>SIF</strong>
+                    		<input type="text" name="sif" id="sif" class="textoBusca" maxlength="4" onkeyup="show()" />
+                    	</li>
+                      <div id="conteudo_producao">
+                      <li>
+							<strong>Data de Produção</strong>
+							<input type="text" name="data_producao" OnKeyUp="mascara_data_prod(this.value)" maxlength="10" class="textoBusca" /> dd/mm/aaaa
+                 	  </li>
+                      </div>
+                      <div id="conteudo_embalagem">
+                      <li>
+                      		<strong>Data da Embalagem</strong>
+                      		<input type="text" name="data" OnKeyUp="mascara_data(this.value)" maxlength="10" class="textoBusca" /> dd/mm/aaaa
+                 	  </li>
+                 	  <li>
+							<strong>ID</strong>
+							<input type="text" name="prioridade" class="textoBusca" maxlength="4" />&nbsp;<a href='#' class='basic'  onmouseover="showToolTip(event,'');return false" onmouseout="hideToolTip()"><img src="images/duvida.gif" width="23" height="19" /></a>
+                 	  </li>
+
+                      </div>
+                      <li id="botao">
+                      	<input type="image" src="images/botao-ok.jpg" />
+                      </li>
+                      <li>
+                      		<!-- <img src="images/etiqueta-ilustrativa.jpg" width="413" height="323" /> -->
+                            <img src="images/etiqueta.jpg" width="288" height="202" />
+                      </li>
+					</ul>
+                  </form>
+</div>
+
+		<!-- modal content -->
+		<div id="basic-modal-content">
+			<img src="images/selo.png" width="284" height="220" />
+		</div>
+
+		<!-- preload the images -->
+		<div style='display:none'>
+			<img src="images/fechar.gif" alt='' />
+		</div>
+<div id="bubble_tooltip">
+	<div class="bubble_top"><span></span></div>
+	<div class="bubble_middle"><span id="bubble_tooltip_content">Content is comming here as you probably can see.Content is comming here as you probably can see.</span></div>
+	<div class="bubble_bottom"></div>
+</div>
+<script type='text/javascript' src='js/jquery.js'></script>
+<script type='text/javascript' src='js/jquery.simplemodal.js'></script>
+<script type='text/javascript' src='js/basic.js'></script>
+</body>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+	<link rel="StyleSheet" href="http://www.marfrig.com.br/css/styleIframes.css" type="text/css" media="screen" />
+<style type="text/css">
+#guardaGadoLegal {
+								float:left;
+								width:675px;
+}
+#guardaGadoLegal form,
+#guardaGadoLegal form ul {
+                float:left;
+}
+#guardaGadoLegal form ul li{
+                float:left;
+                padding-left:5px;
+}
+#guardaGadoLegal form ul #botao {
+                padding:2px 0px 0px 3px;
+}
+#guardaGadoLegal .textoBusca {
+                height:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+				<!-- CONTEDO CENTRAL -->
+				<div id="guardaGadoLegal">
+ <font face="Arial" size=2>
+<p>Microsoft OLE DB Provider for SQL Server</font> <font face="Arial" size=2>error '80040e07'</font>
+<p>
+<font face="Arial" size=2>Error converting data type varchar to datetime.</font>
+<p>
+<font face="Arial" size=2>/rastreabilidade/origem-lotes.asp</font><font face="Arial" size=2>, line 81</font> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+	<link rel="StyleSheet" href="http://www.marfrig.com.br/css/styleIframes.css" type="text/css" media="screen" />
+<style type="text/css">
+#guardaGadoLegal {
+								float:left;
+								width:675px;
+}
+#guardaGadoLegal form,
+#guardaGadoLegal form ul {
+                float:left;
+}
+#guardaGadoLegal form ul li{
+                float:left;
+                padding-left:5px;
+}
+#guardaGadoLegal form ul #botao {
+                padding:2px 0px 0px 3px;
+}
+#guardaGadoLegal .textoBusca {
+                height:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+				<!-- CONTEDO CENTRAL -->
+				<div id="guardaGadoLegal">
+ <font face="Arial" size=2>
+<p>Microsoft OLE DB Provider for SQL Server</font> <font face="Arial" size=2>error '80040e07'</font>
+<p>
+<font face="Arial" size=2>Error converting data type varchar to datetime.</font>
+<p>
+<font face="Arial" size=2>/rastreabilidade/origem-lotes.asp</font><font face="Arial" size=2>, line 81</font> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Created by Foster Web Solutions 
+     Web sites, Webdesign, E-commerce, E-Business, Internet Marketing  -->
+<!-- http://www.foster.com.br -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+	<title>Marfrig Group - Produtos de qualidade e origem sócio-ambiental</title>
+		<!-- META TAGS -->
+	<meta http-equiv="Content-Language" content="pt-br" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store" />
+	<meta http-equiv="Pragma" content="no-cache, no-store" />
+	<meta name="robots" content="Index, Follow" />
+	<meta name="classification" content="Internet" />
+	<meta http-equiv="expires" content="never" />
+	<meta name="author" content="foster web solutions consulting - http://www.foster.com.br" />
+	<meta name="generator" content="macromedia homesite" />
+	<meta name="distribution" content="Global" />
+	<meta name="revisit-after" content="1 Days" />
+	<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+	<!-- META TAGS -->
+	
+	<!-- CSS -->
+	<link rel="StyleSheet" href="/css/styleSite.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/css/jqtransform.css">
+	<!-- CSS -->
+	
+	<!-- JS -->
+	<script src="/js/jquery.js" type="text/javascript"></script>
+	<script src="/js/scriptsSite.js" type="text/javascript"></script>
+	<script src="/js/swfobject.js" type="text/javascript"></script>
+	<script src="/js/jquery.jqtransform.js" type="text/javascript"></script>
+	<!-- JS -->
+	<!-- ******************** METAS DESTA SEÇÃO ******************** -->
+	<meta name="Description" content="O Grupo Marfrig respeita o meio ambiente e as pessoas para quem trabalha, dessa forma, fornece produtos com garantia de origem e responsabilidade sócio-ambiental" />
+    <meta name="Keywords" content="Marfrig, Marfrig alimentos, companhia de alimentos, carne bovina, carne suína, carne ovina, carne avícola, avícola in natura,produtos alimentícios, proteína animal, gado, carne" />
+	<!--/ ******************** METAS DESTA SEÇÃO ******************* -->
+	<style type="text/css">
+		#conteudo .texto{
+			line-height:19px;
+		}
+		#conteudo .textoAzul{
+			color:#0e2648;
+		}
+		table{
+			border-collapse:collapse;
+		}
+		table, td, th{
+			border-color:#0e2648;
+		}
+		td{
+			width:400px;
+			/*height:19px;*/
+			text-align:center;
+			color:#0e2648;
+			font-weight:bold;
+			padding:3px 0px 3px 0px;
+		}
+		.azul{
+			background:#0e2648;
+			color:#fff;
+			/*height:20px;*/
+			border:none;
+		}
+		#conteudo a{
+			color:#1465aa;
+			font-weight:bold;
+			text-decoration:underline;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- GUARDA O SITE -->
+	<div id="global">
+		<!-- GUARDA O TOPO -->
+		<div id="topo">
+	<div id="topoContent">
+		<a href="/index.asp" title="Marfrig Group" id="logoHome"><img src="/images-home/marfrig-group.gif" alt="Marfrig Group" /></a>
+		<div id="guardaContentTop">
+			<ul>
+               	<li><a href="/index.asp" title="Home">Home</a></li>
+				<li id="atalhoEnglish"><a href="http://ir.marfrig.com.br/eng/home/index.asp" target="_blank" title="English">English</a></li>
+				<li id="formulario">
+					<form name="form" id="form" action="/busca/busca.asp" id="cse-search-box" name="cse-search-box" method="get">
+                       	<input type="text" buscar" name="q" id="buscar" value="busca..." />
+						<input type="image" name="sa" src="/images-home/botao-ok.gif" id="botaoOk" title="OK" />
+                   </form>
+				  
+				</li>
+            </ul>
+			<div id="selecao">
+				<img src="/images-home/borda-esquerda.gif" alt=" " class="floatLeft" />
+				<div id="conteudoSelecao">
+                      	<form name="formBusca" id="formBusca" action="" method="post">
+                        <select id="selectMarcas" class="selectMarcas" onchange="trocaValText(this);">
+							<option value="Nossas Marcas">Nossas Marcas</option>
+							<!-- <option value="http://www.bassi.com.br/">Bassi</option> -->
+							<option value="http://www.berninafoods.com/">Bernina</option>
+							<!-- <option value="http://www.dagranja.com.br/">DaGranja</option> -->
+							<option value="http://www.mabella.com.br/">Mabella</option>
+							<option value="http://www.moyparkfoodservice.com">Moy Park</option>
+							<option value="http://www.frigorificopatagonia.com/">Patagonia</option>
+							<option value="http://www.paty.com.ar/">Paty</option>
+							<option value="http://www.pemmican.com/">Pemmican</option>
+							<option value="http://www.quickfood.com.ar/">Quickfood</option>
+							<option value="http://www.seara.com.br/">Seara</option>
+							<option value="http://www.ft.com.uy/">Tacuarembó</option>
+						</select>
+						<select id="selectLinks" onchange="trocaValText(this);">
+							<option value="Nossos Links">Nossos Links</option>
+							<option value="http://www.marfrig.com.br/fomento">Fomento</option>
+							<option value="/sustentabilidade/index.asp">Sustentabilidade</option>
+						</select>
+                       </form>
+                      </div>
+				<img src="/images-home/borda-direita.gif" alt=" " class="floatRight" />
+			</div>
+		</div>
+	</div>
+	<div id="menuTop">
+		<ul>
+			<li id="grupoMarfrig"><a href="/marfrig/empresa/empresa.asp" title="Grupo Marfrig" id="marfrig"><img src="/images-home/marfrig-group-grupo-marfrig.gif" alt="Grupo Marfrig" /></a></li>
+			<li><a href="http://ri.marfrig.com.br/port/home/" target="_blank" title="Investidores" id="investidores"><img src="/images-home/marfrig-group-investidores.gif" alt="Investidores" /></a></li>
+			<li><a href="/imprensa/press-releases/releases.asp" title="Imprensa" id="imprensa"><img src="/images-home/marfrig-group-imprensa.gif" alt="Imprensa" /></a></li>
+			<li><a href="/sustentabilidade/index.asp" title="Sustentabilidade" target="_blank" id="sustentabilidade"><img src="/images-home/marfrig-group-sustentabilidade.gif" alt="Sustentabilidade" /></a></li>
+			<li><a href="/consumidores/sites/sites.asp" title="Consumidores" id="consumidores"><img src="/images-home/marfrig-group-consumidores.gif" alt="Consumidores" /></a></li>
+			<li><a href="/produtores-rurais/produtores-rurais.asp" title="Produtores Rurais" id="produtores-rurais"><img src="/images-home/marfrig-group-produtores-rurais.gif" alt="Produtores Rurais" /></a></li>
+			<li id="faleConosco"><a href="/fale-conosco/contatos/contatos.asp" title="Fale Conosco" id="fale-conosco"><img src="/images-home/marfrig-group-fale-conosco.gif" alt="Fale Conosco" /></a></li>
+		</ul>
+	</div>
+	<div id="guardaBanner">
+		<div id="bannerHome"><img src="/images-home/marfrig-group-banner.jpg" alt=" " />
+			<script type="text/javascript">
+				flash('/flash-home/marfrig-group-banner.swf', 'bannerHome', '1280', '235');
+			</script>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    //Define os stylos dos elementos do formulário...
+    $("#formBusca").jqTransform({ imgPath: '/images-home/' });
+	
+	$(function(){
+		$('.jqTransformSelectWrapper ul:first').css('width','127px');
+		$('.jqTransformSelectWrapper ul:last').css('width','110px');
+	});
+</script>
+		<!--/ GUARDA O TOPO -->	
+	
+		<!-- GUARDA O SITE E DEFINE O BG -->
+		<div id="geral">
+        	<!-- CONTAINER DO CONTEDO -->
+			<div id="container">
+				<!-- LATERAL ESQUERDA -->
+	        	<div id="lateralEsquerda">
+					<!-- Menu Lateral -->
+										<div id="guardaMenu">
+                    	<img src="/images/bg-menu-alto.gif" alt=" " class="floatLeft" />
+		            	<ul id="menuLateral">
+							
+							<!-- SESSÃO Gado Legal -->
+							<li>
+								<a href="/rastreabilidade/default.asp" title="Gado Legal">Gado Legal</a>
+								<ul>
+									<li><a href="/marfrig/empresa/empresa.asp" id="marfrig" title="Grupo Marfrig">Grupo Marfrig</a></li>
+									<li><a href="http://ri.marfrig.com.br/" target="_blank" id="#" title="Investidores">Investidores</a></li>
+									<li><a href="/imprensa/press-releases/releases.asp" id="imprensa" title="Imprensa">Imprensa</a></li>
+									<li><a href="/sustentabilidade/index.asp" id="#" title="Sustentabilidade" target="_blank">Sustentabilidade</a></li>
+									<li><a href="/marfrig/nossas-marcas/nossas-marcas.asp" id="nossas-marcas" title="Consumidores">Consumidores</a></li>
+									<li><a href="/produtores-rurais/produtores-rurais.asp" id="produtores-rurais" title="Produtores Rurais">Produtores Rurais</a></li>
+									<li><a href="/fale-conosco/contatos/contatos.asp" id="contatos" title="Fale Conosco">Fale Conosco</a></li>
+								</ul>
+							</li>
+							<!--/ SESSÃO Gado Legal -->
+							
+		                </ul>
+						<img src="/images/bg-menu-baixo.gif" alt=" " class="floatLeft" />
+                    </div>
+                    <br class="clear" />
+					<!--/ Menu Lateral -->
+					
+					<!-- Cross Links da Lateral -->
+										<ul id="crossLinkLateral">
+						<li class="crossLink">							
+	                        <img src="/images/mais-destaques-internas.gif" alt="+ Destaques" title="+ Destaques" class="tituloCross" />
+	                       	<div id="swfDestInternas"><img src="/images/crosslink-menor-churrasco.jpg" alt=" " /></div>
+						    <script type="text/javascript">
+								flash('/flash/crosslink-seara-churrasco.swf','swfDestInternas','236','76');
+							</script>
+						</li>
+						
+						<li class="crossLink">
+							<a href="http://www.youtube.com/marfrigAlimentos" target="_blank" title="Acesse nosso canal YouTube" ><img src="/images/acesse-nosso-canal-youtube.gif" alt="Acesse nosso canal YouTube" /></a>
+							<!--<img src="/images/lancamentos.gif" alt="Lançamentos" title="Lançamentos" class="tituloCross" />
+							<div id="swfLanacamentos"><img src="/images/banner-menor-01.jpg" alt=" " /></div>
+						
+							<script type="text/javascript">
+                            	flash('/flash/lancamentos-menor.swf','swfLanacamentos','236','76');
+                            </script>-->
+						</li>
+					</ul>
+					<br class="clear" />
+					<!--/ Cross Links da Lateral -->
+	            </div>
+				<!--/ LATERAL ESQUERDA -->
+				
+				<!-- CONTEDO CENTRAL -->
+				<div id="conteudoCentral">
+					<!-- BREAD CRUMBS -->
+	            	<div id="breadCrumbs">
+	                	<div id="indicador">Você está em:</div> <a href="/index.asp" title="Home">Home</a><span id="pagAtual" title="Gado Legal">Gado Legal</span>
+	                </div>
+					<!--/ BREAD CRUMBS -->
+					
+					<!-- Ttulo da Pgina, Indique e Compartilhe -->
+					<div id="titulo">
+	                	<h1 title="Gado Legal">Gado Legal</h1>
+	                							<!-- <ul id="indiqueCompart">
+							<li id="compartilhe"><a href="javascript:void(0);" onclick="openGigya(30,495)" title="Compartilhe">Compartilhe</a></li>
+	                    </ul> -->
+	                    
+	                    <!-- Gigya -->
+			            <!-- <div id="divWildfirePost" class="divWildfire">&nbsp;</div> -->
+						<!-- <div id="contentGigya" class="esconder">
+							<a href="http://marfrig.com.br/rastreabilidade/origem-lotes.asp" target="_blank">Marfrig</a>
+						</div> -->
+						<!--/ Gigya -->
+						
+	                </div>
+					<!--/ Ttulo da Pgina, Indique e Compartilhe -->
+					
+					<!-- CONTEDO DA PGINA (Largura mx suportada: 695px) -->
+					 <div id="conteudo">
+					 	<strong class="texto">SIF 2543 - SIF 2543 - Promissão/SP</strong><br />
+						<strong class="texto textoAzul">Origem dos lotes abatidos em 10.06.2010</strong><br /><br />
+						<p class="texto">Acesse a <a href="http://siscom.ibama.gov.br/geo_sicafi/" title="lista do IBAMA" target="_blank">lista do IBAMA</a> e do <a href=" http://www.mte.gov.br/trab_escravo/default.asp" title="Trabalho Escravo" target="_blank">Trabalho Escravo</a> e confirme que a Marfrig não compra gado de nenhuma delas.<br />
+							OBS: eventualmente alguma fazenda pode ter entrado na lista do IBAMA após a última compra da Marfrig.<br />
+							Favor cruzar a data de debate constante na etiqueta do produto com a data de entrada da fazenda que aparece nas listas.
+						</p>
+						<br class="clear" />
+						<table cellspacing="0" cellpadding="0" border="1" align="center">
+							<tr>
+							    <td class="azul"><strong>FAZENDA</strong></td>
+							    <td class="azul"><strong>CNPJ</strong></td>
+							    <td class="azul"><strong>MUNICÍPIO</strong></td>
+							    <td class="azul"><strong>ESTADO</strong></td>
+							</tr>
+							<tr>
+							    <td>SIF 2543</td>
+							    <td></td>
+							    <td>Promissão</td>
+							    <td>SP</td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							</tr>
+							<tr>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							    <td></td>
+							</tr>
+						</table>
+					</div>
+					<br class="clear" />
+					<!--/ CONTEDO DA PGINA (Largura mx suportada: 695px) -->
+	            </div>
+				<br class="clear" />
+				<!--/ CONTEDO CENTRAL -->
+	        </div>
+			<!--/ CONTAINER DO CONTEDO -->
+        </div>
+		<!--/ GUARDA O SITE E DEFINE O BG -->
+		
+		<!-- RODAP -->
+				<div id="rodape">
+			<!--  Compartilhe Rodape -->
+			<div id="guardaCompartilhe">
+				<ul id="compartilhe">
+					<li id="iconeCompartilhe">
+						<a href="http://www.addthis.com/bookmark.php?v=250&amp;username=marfrig" class="addthis_button" title="Compartilhe">Compartilhe</a>
+						<script type="text/javascript">var addthis_share = {email_template:"marfrig-group"}; var addthis_config = {"data_track_clickback":true};</script>
+						<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=marfrig"></script>
+					</li>
+					<li id="iconeFavoritos"><a href="javascript:addFav();" title="Favoritos">Favoritos</a></li>
+					<li id="iconeImprimir"><a href="javascript:window.print();" title="Imprimir">Imprimir</a></li>
+				</ul>
+			</div>
+			<!--  /Compartilhe Rodape -->
+			
+			
+			<!-- Parte Superior do Rodape -->
+			<div id="superiorRodape">
+            	<div class="centraliza">
+					<!-- Primeira Coluna -->
+					<div id="colunaUmRodape">
+                    	<ul>
+							<li><a href="/marfrig/empresa/empresa.asp" title="GRUPO MARFRIG" class="bold">GRUPO MARFRIG</a></li>
+							<li><a href="/marfrig/empresa/empresa.asp" title="A Empresa">A Empresa</a></li>
+							<li><a href="/marfrig/codigo-etica/codigo-etica.asp" id="codigo-etica" title="Código de Ética">Código de Ética</a></li>
+							<li><a href="/marfrig/visao-missao-valores/visao-missao-valores.asp" title="Visão, Missão e Valores">Visão, Missão e Valores</a></li>
+							<li><a href="/marfrig/cronologia/cronologia.asp" title="Cronologia">Cronologia</a></li>
+							<li><a href="/marfrig/identidade-da-marca/identidade-da-marca.asp" title="Identidade da Marca">Identidade da Marca</a></li>
+							<li><a href="/marfrig/nossas-marcas/nossas-marcas.asp" title="Nossas Marcas">Nossas Marcas</a></li>
+							<li><a href="/marfrig/divisao-de-negocios/divisao-de-negocios.asp" title="Divisão de Negócios">Divisão de Negócios</a></li>
+							<li><a href="/marfrig/unidades/unidades.asp" title="Unidades">Unidades</a></li>
+							<li><a href="/marfrig/reconhecimentos/premiacoes/premiacoes.asp" title="Reconhecimentos">Reconhecimentos</a></li>
+							<li><a href="/marfrig/governanca-corporativa/governanca-corporativa.asp" title="Governança Corporativa">Governança Corporativa</a></li>
+							<li><a href="/marfrig/videos/videos.asp" title="Vídeos">Vídeos</a></li>
+	                    </ul>
+                    </div>
+					<!--/ Primeira Coluna -->
+					
+					<!-- Segunda Coluna -->
+					<div id="colunaDoisRodape">
+                    	<ul>
+	                    	<li><a href="http://ri.marfrig.com.br" target="_blank" title="INVESTIDORES" class="bold">INVESTIDORES</a></li>
+	                    </ul>
+						<ul>
+	                    	<li><a href="/imprensa/press-releases/releases.asp" title="IMPRENSA" class="bold">IMPRENSA</a></li>
+	                    	<li><a href="/imprensa/press-releases/releases.asp" title="Press-Releases">Press-Releases</a></li>
+							<li><a href="/imprensa/assessoria_imprensa/assessoria_imprensa.asp" title="Contato">Contato</a></li>
+							<li><a href="/imprensa/cadastro-jornalista/cadastrese.asp" title="Cadastro de Jornalista">Cadastro de Jornalista</a></li>
+	                    </ul>
+                    </div>
+					<!--/ Segunda Coluna -->
+					
+					<!-- Terceira Coluna -->
+					<div id="colunaTresRodape">
+                    	<ul>
+	                    	<li><a href="/sustentabilidade/index.asp" target="_blank" title="SUSTENTABILIDADE" class="bold">SUSTENTABILIDADE</a></li>
+	                    </ul>
+						<ul>
+	                    	<li><a href="/consumidores/sites/sites.asp" title="CONSUMIDORES" class="bold">CONSUMIDORES</a></li>
+							<li><a href="/consumidores/sites/sites.asp" title="Sites">Sites</a></li>
+	                    </ul>
+						<ul>
+	                    	<li><a href="/produtores-rurais/produtores-rurais.asp" title="PRODUTORES RURAIS" class="bold">PRODUTORES RURAIS</a></li>
+	                    	<li><a href="http://www.marfrig.com.br/fomento" title="Programa Fomento" target="_blank">Programa Fomento</a></li>
+						</ul>
+                    </div>
+					<!--/ Terceira Coluna -->
+					
+					<!-- Quarta Coluna -->
+					<div id="colunaQuatroRodape">
+                    	<ul>
+	                    	<li><a href="/fale-conosco/contatos/contatos.asp" title="FALE CONOSCO" class="bold">FALE CONOSCO</a></li>
+							<li><a href="/fale-conosco/contatos/contatos.asp" id="contatos" title="Contatos">Contatos</a></li>
+							<li><a href="http://curriculo.marfrig.com.br/" id="curriculoLogin" title="Trabalhe Conosco">Trabalhe Conosco</a></li>
+							<li><a href="mailto:seara.atende@seara.com.br" id="seara" title="SAC – Sear@tende">SAC – Sear@tende</a></li>
+							<li><a href="/fale-conosco/filiais-de-vendas/filiais-de-vendas.asp" id="filiais-de-vendas" title="Central de Vendas">Central de Vendas</a></li>
+							<li><a href="/fale-conosco/como-chegar/como-chegar.asp" id="como-chegar" title="Como Chegar">Como Chegar</a></li>
+	                    </ul>
+						<ul>
+	                    	<li><a href="/mapa-do-site/mapa-do-site.asp" title="MAPA DO SITE" class="bold">MAPA DO SITE</a></li>
+	                    </ul>
+                    </div>
+					<!--/ Quarta Coluna -->
+
+                </div>
+            </div>
+			<!--/ Parte Superior do Rodape -->
+			
+			<!-- Parte Inferior do Rodape -->
+			<div id="inferiorRodape">
+				<!-- Centraliza o Contedo -->
+				<div class="centraliza">
+                	<!-- Lado Esquerdo Inferior -->
+					<ul id="esqInferior">
+                    	<li><strong>&copy;2011 Marfrig Alimentos S/A</strong></li>
+						<li>Rua Chedid Jafet, 222 - Bloco A - 5º Andar, Ed. Milennium - Vila Olímpia - São Paulo - CEP 04551-065 - Fone/Fax: 11 3728-8600</li>
+						<li><a href="/termos-e-condicoes-de-uso/termos-e-condicoes-de-uso.asp" title="Termos e Condições">Termos e Condições</a> | <a href="/politica-de-privacidade/politica-de-privacidade.asp" title="Política de Privacidade">Política de Privacidade</a> | <a href="http://www.youtube.com.br/marfrigAlimentos" title="YouTube Marfrig Alimentos" target="_blank">YouTube</a></li>
+                    </ul>
+					<!--/ Lado Esquerdo Inferior -->
+					
+					<!-- Lado Direito Inferior -->
+					<div id="designFoster">
+						Desenvolvido por <a href="http://www.foster.com.br/" target="_blank" title="Foster">Foster</a>
+					</div>
+					<!--/ Lado Direito Inferior -->
+                </div>
+				<!-- Centraliza o Contedo -->
+            </div>
+			<!-- Parte Inferior do Rodape -->
+			
+        </div>
+		<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-16877662-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+		<!--/ RODAP -->
+    </div>
+	<!--/ GUARDA O SITE -->
+</body>
+</html>

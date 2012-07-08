@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+
+
+	<script>
+          function mascara_data(data){
+              var mydata = '';
+              mydata = mydata + data;
+              if (mydata.length == 2){
+                  mydata = mydata + '/';
+                  document.forms[0].data.value = mydata;
+              }
+              if (mydata.length == 5){
+                  mydata = mydata + '/';
+                  document.forms[0].data.value = mydata;
+              }
+              if (mydata.length == 10){
+                  verifica_data();
+              }
+          }
+
+          function mascara_data_prod(data_producao){
+		                var mydata = '';
+		                mydata = mydata + data_producao;
+		                if (mydata.length == 2){
+		                    mydata = mydata + '/';
+		                    document.forms[0].data_producao.value = mydata;
+		                }
+		                if (mydata.length == 5){
+		                    mydata = mydata + '/';
+		                    document.forms[0].data_producao.value = mydata;
+		                }
+		                if (mydata.length == 10){
+		                    verifica_data_prod();
+		                }
+          }
+
+          function verifica_data () {
+
+            dia = (document.forms[0].data.value.substring(0,2));
+            mes = (document.forms[0].data.value.substring(3,5));
+            ano = (document.forms[0].data.value.substring(6,10));
+
+            situacao = "";
+            // verifica o dia valido para cada mes
+            if ((dia < 01)||(dia < 01 || dia > 30) && (  mes == 04 || mes == 06 || mes == 09 || mes == 11 ) || dia > 31) {
+                situacao = "falsa";
+            }
+
+            // verifica se o mes e valido
+            if (mes < 01 || mes > 12 ) {
+                situacao = "falsa";
+            }
+
+            // verifica se e ano bissexto
+            if (mes == 2 && ( dia < 01 || dia > 29 || ( dia > 28 && (parseInt(ano / 4) != ano / 4)))) {
+                situacao = "falsa";
+            }
+
+            if (document.forms[0].data.value == "") {
+                situacao = "falsa";
+            }
+
+            if (situacao == "falsa") {
+                alert("Data inválida!");
+                document.forms[0].data.focus();
+            }
+          }
+
+		 function verifica_data_prod () {
+
+            dia = (document.forms[0].data_producao.value.substring(0,2));
+            mes = (document.forms[0].data_producao.value.substring(3,5));
+            ano = (document.forms[0].data_producao.value.substring(6,10));
+
+            situacao = "";
+            // verifica o dia valido para cada mes
+            if ((dia < 01)||(dia < 01 || dia > 30) && (  mes == 04 || mes == 06 || mes == 09 || mes == 11 ) || dia > 31) {
+                situacao = "falsa";
+            }
+
+            // verifica se o mes e valido
+            if (mes < 01 || mes > 12 ) {
+                situacao = "falsa";
+            }
+
+            // verifica se e ano bissexto
+            if (mes == 2 && ( dia < 01 || dia > 29 || ( dia > 28 && (parseInt(ano / 4) != ano / 4)))) {
+                situacao = "falsa";
+            }
+
+            if (document.forms[0].data_producao.value == "") {
+                situacao = "falsa";
+            }
+
+            if (situacao == "falsa") {
+                alert("Data inválida!");
+                document.forms[0].data_producao.focus();
+            }
+          }
+
+          function mascara_hora(hora){
+              var myhora = '';
+              myhora = myhora + hora;
+              if (myhora.length == 2){
+                  myhora = myhora + ':';
+                  document.forms[0].hora.value = myhora;
+              }
+              if (myhora.length == 5){
+                  verifica_hora();
+              }
+          }
+
+          function verifica_hora(){
+              hrs = (document.forms[0].hora.value.substring(0,2));
+              min = (document.forms[0].hora.value.substring(3,5));
+
+              alert('hrs '+ hrs);
+              alert('min '+ min);
+
+              situacao = "";
+              // verifica data e hora
+              if ((hrs < 00 ) || (hrs > 23) || ( min < 00) ||( min > 59)){
+                  situacao = "falsa";
+              }
+
+              if (document.forms[0].hora.value == "") {
+                  situacao = "falsa";
+              }
+
+              if (situacao == "falsa") {
+                  alert("Hora inválida!");
+                  document.forms[0].hora.focus();
+              }
+          }
+       </script>
+       <script type="text/javascript">
+	   		function show(){
+				if(document.getElementById('sif').value == ''){
+					document.getElementById('conteudo_embalagem').style.display = 'none';
+					document.getElementById('conteudo_producao').style.display = 'none';
+				}
+				else{
+					if(document.getElementById('sif').value == '3712' || document.getElementById('sif').value == '2543' || 
+						document.getElementById('sif').value == '4238' || document.getElementById('sif').value == '2500' ||
+						document.getElementById('sif').value == '1751' || document.getElementById('sif').value == '3047' ||
+						document.getElementById('sif').value == '3062' || document.getElementById('sif').value == '4334' ||
+						document.getElementById('sif').value == '3250' ){
+						document.getElementById('conteudo_embalagem').style.display = 'block';
+						document.getElementById('conteudo_producao').style.display = 'block';
+					}else{
+						document.getElementById('conteudo_embalagem').style.display = 'none';
+						document.getElementById('conteudo_producao').style.display = 'block';
+					}
+				}
+			}
+		</script>
+<script type="text/javascript" src="js/bubble-tooltip.js"></script>
+<link rel="StyleSheet" href="http://www.marfrig.com.br/css/styleIframes.css" type="text/css" media="screen" />
+
+<!-- Contact Form CSS files -->
+<link rel="stylesheet" href="css/bubble-tooltip.css" media="screen">
+<link type='text/css' href='css/basic.css' rel='stylesheet' media='screen' />
+<!-- IE6 "fix" for the close png image -->
+<!--[if IE]>
+<link type='text/css' href='css/basic_ie.css' rel='stylesheet' media='screen' />
+<![endif]-->
+<style type="text/css">
+#guardaGadoLegal {
+								float:left;
+								width:675px;
+}
+#guardaGadoLegal form,
+#guardaGadoLegal form ul {
+                float:left;
+}
+#guardaGadoLegal form ul li{
+                float:none;
+                padding-left:5px;
+                padding-bottom:5px;
+}
+#guardaGadoLegal form ul #botao {
+                padding:2px 0px 0px 3px;
+}
+#guardaGadoLegal .textoBusca {
+                height:16px;
+}
+
+#conteudo_producao {
+	display:none;
+}
+
+#conteudo_embalagem {
+	display:none;
+}
+
+</style>
+</head>
+<body>
+
+                <div id="guardaGadoLegal">
+
+
+									<img src="images/logo-gado-legal.jpg"
+									     alt="Gado Legal"
+									     title="Gado Legal"
+									     class="floatLeft" id="logo" />
+									<p>Favor preencher os campos abaixo.</p>
+									<form action="origem-lotes.asp">
+                  	<ul>
+                    	<li>
+                    		<strong>SIF</strong>
+                    		<input type="text" name="sif" id="sif" class="textoBusca" maxlength="4" onkeyup="show()" />
+                    	</li>
+                      <div id="conteudo_producao">
+                      <li>
+							<strong>Data de Produção</strong>
+							<input type="text" name="data_producao" OnKeyUp="mascara_data_prod(this.value)" maxlength="10" class="textoBusca" /> dd/mm/aaaa
+                 	  </li>
+                      </div>
+                      <div id="conteudo_embalagem">
+                      <li>
+                      		<strong>Data da Embalagem</strong>
+                      		<input type="text" name="data" OnKeyUp="mascara_data(this.value)" maxlength="10" class="textoBusca" /> dd/mm/aaaa
+                 	  </li>
+                 	  <li>
+							<strong>ID</strong>
+							<input type="text" name="prioridade" class="textoBusca" maxlength="4" />&nbsp;<a href='#' class='basic'  onmouseover="showToolTip(event,'');return false" onmouseout="hideToolTip()"><img src="images/duvida.gif" width="23" height="19" /></a>
+                 	  </li>
+
+                      </div>
+                      <li id="botao">
+                      	<input type="image" src="images/botao-ok.jpg" />
+                      </li>
+                      <li>
+                      		<!-- <img src="images/etiqueta-ilustrativa.jpg" width="413" height="323" /> -->
+                            <img src="images/etiqueta.jpg" width="288" height="202" />
+                      </li>
+					</ul>
+                  </form>
+</div>
+
+		<!-- modal content -->
+		<div id="basic-modal-content">
+			<img src="images/selo.png" width="284" height="220" />
+		</div>
+
+		<!-- preload the images -->
+		<div style='display:none'>
+			<img src="images/fechar.gif" alt='' />
+		</div>
+<div id="bubble_tooltip">
+	<div class="bubble_top"><span></span></div>
+	<div class="bubble_middle"><span id="bubble_tooltip_content">Content is comming here as you probably can see.Content is comming here as you probably can see.</span></div>
+	<div class="bubble_bottom"></div>
+</div>
+<script type='text/javascript' src='js/jquery.js'></script>
+<script type='text/javascript' src='js/jquery.simplemodal.js'></script>
+<script type='text/javascript' src='js/basic.js'></script>
+</body>
+

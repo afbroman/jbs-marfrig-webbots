@@ -21,7 +21,24 @@ result_dir = "/Users/abroman/Documents/SAGE Project/Results/JBS/"
 date_array = Array.new
 filename_array = Array.new
 
+year = 2012
+(3..6).each do |month|
+  month = "0#{month}" if month < 10
+  (1..31).each do |day|
+    day = "0#{day}" if day < 10
 
+    next if day == 31 && (month == "04" || month == "06")
+
+    date_array << "#{day}/#{month}/#{year}"
+    filename_array << "#{day}_#{month}_#{year}"
+
+  end
+end
+    
+
+
+
+=begin
 for year in 2010..2012
   for month in 1..12
     month = "0#{month}" if month < 10
@@ -50,6 +67,8 @@ end
 
 date_array << "29/02/2012"
 filename_array << "29_02_2012"
+=end
+
 
 
 #sif_array = [4121,2979,42,2837,2601,826,3000,200]

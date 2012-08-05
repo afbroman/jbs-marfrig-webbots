@@ -21,14 +21,15 @@ result_dir = "/Users/abroman/Documents/SAGE Project/Results/JBS/"
 date_array = Array.new
 filename_array = Array.new
 
-for year in 2008..2012
+
+for year in 2010..2012
   for month in 1..12
     month = "0#{month}" if month < 10
     for day in 1..31
       day = "0#{day}" if day < 10
 
-      # Limit 2008 to after October 1st
-      next if year == 2008 && month.to_i < 10
+      # Limit 2010 to after August 1st
+      next if year == 2010 && month.to_i < 8
 
       # Limit 2012 to before July 1st
       next if year == 2012 && month.to_i > 6
@@ -44,6 +45,8 @@ for year in 2008..2012
     end
   end
 end
+
+
 
 date_array << "29/02/2012"
 filename_array << "29_02_2012"

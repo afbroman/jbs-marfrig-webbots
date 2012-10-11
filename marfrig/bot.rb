@@ -4,7 +4,7 @@ require 'curl'
 require 'uri'
 require 'timeout'
 
-result_dir = "/Volumes/Backup/SAGE Results/marfrig/"
+result_dir = "/Users/abroman/Documents/SAGE\ Project/Results/2012.10/"
 
 if ARGV.empty?
   puts "Usage: <filename> <list of sifs>"
@@ -19,30 +19,24 @@ end
 
 # The use of integers & strings here is rather messy. TODO: Fix the use of strings/integer
 date_array = Array.new
+filename_array = Array.new
 
-for year in 2008..2012
-  for month in 1..12
+year = 2012
+
+  for month in 3..9
     month = "0#{month}" if month < 10
     for day in 1..31
       day = "0#{day}" if day < 10
 
-      # Limit 2008 to after October 1st
-      next if year == 2008 && month.to_i < 10
-
-      # Limit 2012 to before March 1st
-      next if year == 2012 && month.to_i > 2
       
       # Limit April, June, September, and November 
-      next if day == 31 && (month == "04" || month == "06" || month == "09" || month == 11)
-      # Limit February
-      next if (day == 29 || day == 30 || day == 31) && month == "02"
+      next if day == 31 && (month == "04" || month == "06" || month == "09")
       
-      date_array << "#{day}%2F#{month}%2F#{year}"
+      date_array << "#{day}/#{month}/#{year}"
+      filename_array << "#{day}_#{month}_#{year}"
     end
   end
-end
 
-date_array << "29%2F02%2F2012"
 
 # Build array of SIF values (just two?) 
 # 3712 2543 4238 2500 1751 3047 3062 4334 3250
@@ -51,7 +45,11 @@ date_array << "29%2F02%2F2012"
 
 # Loop through SIF values and legitimate dates. For each, build URL to "get"
 # http://rastreabilidade.marfrig.com.br/rastreabilidade/origem-lotes.asp?sif=1751&data_producao=24%2F02%2F2012
-url_base = "http://rastreabilidade.marfrig.com.br/rastreabilidade/origem-lotes.asp?"
+url = "http://www.marfrig.com.br/rastreabilidade/origem-lotes.asp"
+
+post_data = Hash.new
+post_data[:sif] = "1497"
+post_data[:data_producao] = "29/02/2012"
 
 #uf_array = Array.new
 
@@ -65,16 +63,20 @@ url_base = "http://rastreabilidade.marfrig.com.br/rastreabilidade/origem-lotes.a
 curl = CURL.new
 curl.user_agent_alias = "Mac Safari"
 
+cleanup_array = Array.new
 cleanup_filename_array = Array.new
 
-for sif in sif_array
-  for date in date_array
+sif_array.each do |sif|
+  date_array.each_with_index do |date,index|
     begin
       Timeout::timeout(30) do
-        url = "#{url_base}sif=#{sif}&data_producao=#{date}"
-        file = "#{sif}_#{date}.html"
-        f = File.open("#{result_dir}#{file}", 'w')
-        result = curl.get(url) 
+        file = "#{sif}_#{filename_array[index]}.html"
+        f = File.open("#{result_dir}#{sif}/#{file}", 'w')
+
+        post_data[:sif] = sif
+        post_data[:data_producao] = date
+
+        result = curl.post(url, post_data) 
 
         f.write(result)
         f.close()
@@ -82,6 +84,7 @@ for sif in sif_array
     rescue => error
       raise unless error.instance_of? Timeout::Error
       cleanup_array << [sif,date] 
+      cleanup_filename_array << "#{sif}_#{filename_array[index]}"
       next
     end
   end

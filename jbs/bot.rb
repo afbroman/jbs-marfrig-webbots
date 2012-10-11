@@ -1,17 +1,36 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 require 'curl'
 require 'uri'
 require 'timeout'
+require_relative '../date_range_generator'
+
+start_date = "01/08/2010"
+end_date = Date.today.strftime("%d/%m/%Y")
+
+opts = OptionParser.new do |opts|
+  opts.on("-s", "--start=DATE", "start date") do |value|
+    start_date = value
+  end
+
+  opts.on("-e", "--end=DATE", "end date") do |value|
+    end_date = value
+  end
+
+  opts.banner = "Usage: <list of sifs> [options]"
+end
+
+opts.parse!
 
 if ARGV.empty?
-  puts "Usage: <filename> <list of sifs>"
+  puts opts
   exit
 else
   sif_array = ARGV
 end
 
-result_dir = "/Users/abroman/Documents/SAGE Project/Results/JBS/"
+result_dir = "/Users/ABroman/Downloads/SAGE/"
 
 # Build array of legitimate dates (check email from Holly for limits)
 #   * check email from Holly for limits (10/1/2008 to 2/29/2012)
@@ -21,35 +40,35 @@ result_dir = "/Users/abroman/Documents/SAGE Project/Results/JBS/"
 date_array = Array.new
 filename_array = Array.new
 
-
-for year in 2010..2012
-  for month in 1..12
-    month = "0#{month}" if month < 10
-    for day in 1..31
-      day = "0#{day}" if day < 10
-
-      # Limit 2010 to after August 1st
-      next if year == 2010 && month.to_i < 8
-
-      # Limit 2012 to before July 1st
-      next if year == 2012 && month.to_i > 6
-      
-      # Limit April, June, September, and November 
-      next if day == 31 && (month == "04" || month == "06" || month == "09" || month == 11)
-      # Limit February
-      next if (day == 29 || day == 30 || day == 31) && month == "02"
-      
-      date_array << "#{day}/#{month}/#{year}"
-      filename_array << "#{day}_#{month}_#{year}"
-      
-    end
-  end
+DateRangeGenerator.new.generate(start_date, end_date).each do |date| 
+  date_array << date.strftime("%d/%m/%Y")
+  filename_array << date.strftime("%d_%m_%Y")
 end
 
+# for year in 2010..2012
+#   for month in 1..12
+#     month = "0#{month}" if month < 10
+#     for day in 1..31
+#       day = "0#{day}" if day < 10
 
+#       # Limit 2010 to after August 1st
+#       next if year == 2010 && month.to_i < 8
 
-date_array << "29/02/2012"
-filename_array << "29_02_2012"
+#       # Limit 2012 to before July 1st
+#       next if year == 2012 && month.to_i > 6
+      
+#       # Limit April, June, September, and November 
+#       next if day == 31 && (month == "04" || month == "06" || month == "09" || month == 11)
+#       # Limit February
+#       next if (day == 29 || day == 30 || day == 31) && month == "02"
+      
+#       date_array << "#{day}/#{month}/#{year}"
+#       filename_array << "#{day}_#{month}_#{year}"
+      
+#     end
+#   end
+# end
+
 
 
 #sif_array = [4121,2979,42,2837,2601,826,3000,200]

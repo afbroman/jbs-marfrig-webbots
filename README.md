@@ -3,6 +3,6 @@ JBS/Marfrig Webbots
 
 Code for reading data from JBS and Marfrig websites.
 
-An utter mess; desperately needs to be cleaned up.
+Attempted rewrite using Net::HTTP, but there's a problem with the date encoding on the JBS bot. 
 
-Should really be rewritten with Mechanize.
+Next step: examine whether this can be rewritten with Mechanize.
